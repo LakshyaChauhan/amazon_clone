@@ -5,13 +5,14 @@ const mongoose = require("mongoose");
 //init
 const PORT = 3000;
 const app = express();
-const DB = "mongodb+srv://clakshya923:likador9life2heaven0703@cluster0.vejvwm5.mongodb.net/?retryWrites=true&w=majority";
+const DB = "mongodb+srv://clakshya923:likador9life2heaven0703@cluster0.1cpfrph.mongodb.net/?retryWrites=true&w=majority";
 
 // Imports from other files
 const authRouter = require("./routes/auth"); 
 
 //middleware
-app.use(authRouter); 
+app.use(express.json());
+app.use(authRouter);
 
 //connections
 mongoose.connect(DB).then(() => {
@@ -23,6 +24,6 @@ mongoose.connect(DB).then(() => {
 
 //Creating an API
 // GET ,PUT , POST , DELETE , UPDATE ->CRUD
-app.listen(PORT,'0.0.0.0',()=>{
-    console.log(`connected to ${PORT} yohoh`)
+app.listen(PORT,"0.0.0.0",()=>{
+    console.log(`connected to ${PORT}`)
 })  

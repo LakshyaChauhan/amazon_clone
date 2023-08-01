@@ -1,6 +1,7 @@
 import 'package:amazon_clone/common/widgets/custom_textfield.dart';
 import 'package:amazon_clone/common/widgets/custombutton.dart';
 import 'package:amazon_clone/constants/global_variables.dart';
+import 'package:amazon_clone/features/auth/services/auth_service.dart';
 import 'package:flutter/material.dart';
 
 enum Auth { signin, signup }
@@ -15,8 +16,9 @@ class AuthScreen extends StatefulWidget {
 
 class _AuthScreenState extends State<AuthScreen> {
   Auth _auth = Auth.signup;
-  final _signUpkey = GlobalKey<FormState>();
-  final _signInkey = GlobalKey<FormState>();
+  final _signUpFormKey = GlobalKey<FormState>();
+  final _signInFormKey = GlobalKey<FormState>();
+  final AuthServices authServices = AuthServices();
 
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
@@ -28,6 +30,14 @@ class _AuthScreenState extends State<AuthScreen> {
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
+  }
+
+  void signUpUser() {
+    authServices.signUpUser(
+        context: context,
+        name: _nameController.text,
+        email: _emailController.text,
+        password: _passwordController.text);
   }
 
   @override
@@ -42,7 +52,10 @@ class _AuthScreenState extends State<AuthScreen> {
             children: [
               const Text(
                 'Welcome',
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700),
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.w700,
+                ),
               ),
               const SizedBox(height: 5),
               ListTile(
@@ -68,11 +81,13 @@ class _AuthScreenState extends State<AuthScreen> {
                   color: Colors.white,
                   padding: const EdgeInsets.all(8),
                   child: Form(
-                    key: _signUpkey,
+                    key: _signUpFormKey,
                     child: Column(
                       children: [
                         CustomTextField(
-                            controller: _nameController, hintText: 'Name'),
+                          controller: _nameController,
+                          hintText: 'Name',
+                        ),
                         const SizedBox(height: 8),
                         CustomTextField(
                           controller: _emailController,
@@ -84,7 +99,13 @@ class _AuthScreenState extends State<AuthScreen> {
                           hintText: 'Password',
                         ),
                         const SizedBox(height: 8),
-                        CustomButton(onTap: () {}, text: 'Sign Up')
+                        CustomButton(
+                            onTap: () {
+                              if (_signUpFormKey.currentState!.validate()) {
+                                signUpUser();
+                              }
+                            },
+                            text: 'Sign Up')
                       ],
                     ),
                   ),
@@ -112,7 +133,7 @@ class _AuthScreenState extends State<AuthScreen> {
                   color: Colors.white,
                   padding: const EdgeInsets.all(8),
                   child: Form(
-                    key: _signInkey,
+                    key: _signInFormKey,
                     child: Column(
                       children: [
                         CustomTextField(
@@ -125,7 +146,7 @@ class _AuthScreenState extends State<AuthScreen> {
                           hintText: 'Password',
                         ),
                         const SizedBox(height: 8),
-                        CustomButton(onTap: () {}, text: 'Sign Up')
+                        CustomButton(onTap: () {}, text: 'Sign In')
                       ],
                     ),
                   ),
