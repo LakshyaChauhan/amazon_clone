@@ -22,8 +22,10 @@ authRouter.post("/api/signup", async (req ,res)=>{
     });
 
     user = await user.save();
+    console.log('running auth.js done');
     res.json(user);
 }catch(e){
+    console.log('running auth.js error');
     res.status(500).json({error : e.message});
 }
 
