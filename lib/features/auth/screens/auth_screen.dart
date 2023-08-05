@@ -40,6 +40,13 @@ class _AuthScreenState extends State<AuthScreen> {
         password: _passwordController.text);
   }
 
+  void signInUser() {
+    authServices.signInUser(
+        context: context,
+        email: _emailController.text,
+        password: _passwordController.text);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -115,7 +122,7 @@ class _AuthScreenState extends State<AuthScreen> {
                     ? GlobalVariables.backgroundColor
                     : GlobalVariables.greyBackgroundCOlor,
                 title: const Text(
-                  'Create account',
+                  'Sign-in',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 leading: Radio(
@@ -146,7 +153,13 @@ class _AuthScreenState extends State<AuthScreen> {
                           hintText: 'Password',
                         ),
                         const SizedBox(height: 8),
-                        CustomButton(onTap: () {}, text: 'Sign In')
+                        CustomButton(
+                            onTap: () {
+                              if (_signInFormKey.currentState!.validate()) {
+                                signInUser();
+                              }
+                            },
+                            text: 'Sign In')
                       ],
                     ),
                   ),
