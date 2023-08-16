@@ -1,9 +1,9 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:amazon_clone/common/widgets/bottom_bar.dart';
 import 'package:amazon_clone/constants/error_handling.dart';
 import 'package:amazon_clone/constants/global_variables.dart';
 import 'package:amazon_clone/constants/utils.dart';
-import 'package:amazon_clone/features/home/screens/home_screen.dart';
 import 'package:amazon_clone/models/user.dart';
 import 'package:amazon_clone/providers/user_provider.dart';
 import 'package:flutter/material.dart';
@@ -71,7 +71,7 @@ class AuthServices {
           await prefs.setString(
               'x-auth-token', jsonDecode(response.body)['token']);
           Navigator.pushNamedAndRemoveUntil(
-              context, HomeScreen.routeName, (route) => false);
+              context, BottomBar.routeName, (route) => false);
         },
       );
     } catch (e) {
