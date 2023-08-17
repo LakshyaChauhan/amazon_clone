@@ -12,8 +12,8 @@ class BelowAppBar extends StatelessWidget {
 
     return Container(
       decoration: const BoxDecoration(gradient: GlobalVariables.appBarGradient),
-      padding:const EdgeInsets.only(
-        left: 10,
+      padding: const EdgeInsets.only(
+        left: 25,
         right: 10,
         bottom: 10,
       ),
