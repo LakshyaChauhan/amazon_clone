@@ -8,16 +8,17 @@ class CarouselImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CarouselSlider(
-        items: GlobalVariables.carouselImages.map((e) {
-          return Builder(
-            builder: (BuildContext context) => Image.network(
-              e,
-              fit: BoxFit.cover,
-              height: 200,
-            ),
-          );
-        }).toList(),
-        options:
-            CarouselOptions(autoPlay: true, viewportFraction: 1, height: 200));
+      items: GlobalVariables.carouselImages.map((e) {
+        return Builder(
+          builder: (BuildContext context) => Image.network(
+            e,
+            fit: BoxFit.cover,
+            height: 200,
+          ),
+        );
+      }).toList(),
+      options:
+          CarouselOptions(autoPlay: true, viewportFraction: 1, height: 200),
+    );
   }
 }

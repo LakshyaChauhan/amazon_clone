@@ -1,3 +1,4 @@
+import 'package:amazon_clone/features/admin/screens/posts_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../../constants/global_variables.dart';
@@ -21,9 +22,7 @@ class _AdminScreenState extends State<AdminScreen> {
   }
 
   List<Widget> pages = [
-    const Center(
-      child: Text('Posts Page'),
-    ),
+    const PostsScreen(),
     const Center(
       child: Text('Analytics Page'),
     ),
