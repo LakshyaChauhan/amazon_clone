@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:amazon_clone/common/widgets/custom_textfield.dart';
 import 'package:amazon_clone/common/widgets/custombutton.dart';
 import 'package:amazon_clone/constants/utils.dart';
+import 'package:amazon_clone/features/admin/services/admin_services.dart';
 import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dotted_border/dotted_border.dart';
@@ -23,8 +24,11 @@ class _AddProductScreenState extends State<AddProductScreen> {
   final TextEditingController descriptionController = TextEditingController();
   final TextEditingController priceController = TextEditingController();
   final TextEditingController quantityNameController = TextEditingController();
+  final adminServices = AdminServices();
 
   String category = 'Mobiles';
+  List<File> images = [];
+  final _addProductFormkey = GlobalKey<FormState>();
 
   @override
   void dispose() {
@@ -35,13 +39,24 @@ class _AddProductScreenState extends State<AddProductScreen> {
     quantityNameController.dispose();
   }
 
-  List<File> images = [];
-
   void selectImages() async {
     var res = await pickImages();
     setState(() {
       images = res;
     });
+  }
+
+  void sellProduct() {
+    if (_addProductFormkey.currentState!.validate() || images.isNotEmpty) {
+      adminServices.sellProduct(
+          context: context,
+          name: productNameController.text,
+          description: descriptionController.text,
+          price: double.parse(priceController.text),
+          quantity: double.parse(quantityNameController.text),
+          category: category,
+          images: images);
+    }
   }
 
   List<String> productCategories = [
@@ -70,6 +85,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
       ),
       body: SingleChildScrollView(
         child: Form(
+          key: _addProductFormkey,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: Column(
@@ -146,21 +162,22 @@ class _AddProductScreenState extends State<AddProductScreen> {
                 SizedBox(
                   width: double.infinity,
                   child: DropdownButton(
-                      value: category,
-                      items: productCategories.map((String item) {
-                        return DropdownMenuItem(value: item, child: Text(item));
-                      }).toList(),
-                      onChanged: (String? newVal) {
-                        setState(() {
-                          category = newVal!;
-                        });
-                      }),
+                    value: category,
+                    items: productCategories.map((String item) {
+                      return DropdownMenuItem(value: item, child: Text(item));
+                    }).toList(),
+                    onChanged: (String? newVal) {
+                      setState(() {
+                        category = newVal!;
+                      });
+                    },
+                  ),
                 ),
                 const SizedBox(height: 5),
-                Container(
-                  alignment: Alignment.bottomCenter,
-                  child: CustomButton(onTap: () {}, text: 'Sell'),
-                )
+                CustomButton(
+                  text: 'Sell',
+                  onTap: sellProduct,
+                ),
               ],
             ),
           ),
