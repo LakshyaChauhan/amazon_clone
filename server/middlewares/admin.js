@@ -1,3 +1,4 @@
+
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const admin = async (req,res,next)=>{
@@ -8,7 +9,7 @@ const admin = async (req,res,next)=>{
             return res.status(401).json({msg:'No auth token,access denied.'});
         }
 
-        const verified = jwt.verify(token,'passwordkey');
+        const verified = jwt.verify(token,'passwordKey');
 
         if(!verified){
             return res.status(401).json({msg:'Token verification failed, authorization denined.'});
@@ -17,7 +18,7 @@ const admin = async (req,res,next)=>{
 
         const user = await User.findById(verified.id);
 
-        if(user.type == 'user' || user.type == 'seller'){
+        if(user.type == 'user' || user.type == 'default'){
             return res.status(401).json({msg:'You are not authorized.'});
         }
 
@@ -29,5 +30,7 @@ const admin = async (req,res,next)=>{
         res.status(500).json({error: e.message});
     }
 };
+
+
 
 module.exports = admin;

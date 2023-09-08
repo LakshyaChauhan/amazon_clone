@@ -4,7 +4,6 @@ import 'package:amazon_clone/common/widgets/custom_textfield.dart';
 import 'package:amazon_clone/common/widgets/custombutton.dart';
 import 'package:amazon_clone/constants/utils.dart';
 import 'package:amazon_clone/features/admin/services/admin_services.dart';
-import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
@@ -47,7 +46,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
   }
 
   void sellProduct() {
-    if (_addProductFormkey.currentState!.validate() || images.isNotEmpty) {
+    if (_addProductFormkey.currentState!.validate() && images.isNotEmpty) {
       adminServices.sellProduct(
           context: context,
           name: productNameController.text,
@@ -93,15 +92,17 @@ class _AddProductScreenState extends State<AddProductScreen> {
                 const SizedBox(height: 20),
                 images.isNotEmpty
                     ? CarouselSlider(
-                        items: GlobalVariables.carouselImages.map((e) {
-                          return Builder(
-                            builder: (BuildContext context) => Image.network(
-                              e,
-                              fit: BoxFit.cover,
-                              height: 200,
-                            ),
-                          );
-                        }).toList(),
+                        items: images.map(
+                          (i) {
+                            return Builder(
+                              builder: (BuildContext context) => Image.file(
+                                i,
+                                fit: BoxFit.cover,
+                                height: 200,
+                              ),
+                            );
+                          },
+                        ).toList(),
                         options: CarouselOptions(
                             autoPlay: true, viewportFraction: 1, height: 200),
                       )
