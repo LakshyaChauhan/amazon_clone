@@ -1,6 +1,7 @@
 import 'package:amazon_clone/common/widgets/loader.dart';
 import 'package:amazon_clone/constants/global_variables.dart';
 import 'package:amazon_clone/features/home/widgets/address_box.dart';
+import 'package:amazon_clone/features/product_details/screens/product_details_screen.dart';
 import 'package:amazon_clone/features/search/services/search_services.dart';
 import 'package:amazon_clone/features/search/widget/search_products.dart';
 import 'package:amazon_clone/models/product.dart';
@@ -24,7 +25,7 @@ class _SearchScreenState extends State<SearchScreen> {
   void initState() {
     super.initState();
     fetchSearchedProduct();
-  }     
+  }
 
   fetchSearchedProduct() async {
     productsList = await searchServices.fetchCategoryProducts(
@@ -38,6 +39,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
@@ -115,7 +117,13 @@ class _SearchScreenState extends State<SearchScreen> {
                   child: ListView.builder(
                     itemCount: productsList!.length,
                     itemBuilder: (context, index) {
-                      return SearchProducts(product: productsList![index]);
+                      return GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(
+                                context, ProductDetailsScreen.routeName,
+                                arguments: productsList![index]);
+                          },
+                          child: SearchProducts(product: productsList![index]));
                     },
                   ),
                 ),

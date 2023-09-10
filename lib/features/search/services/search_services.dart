@@ -41,7 +41,6 @@ class SearchServices {
     } catch (e) {
       showSnackbar(context, e.toString());
     }
-    print(productList.length);
     return productList;
   }
 }
