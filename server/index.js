@@ -11,12 +11,14 @@ const DB = "mongodb+srv://clakshya923:likador9life2heaven0703@cluster0.1cpfrph.m
 const authRouter = require("./routes/auth"); 
 const adminRouter = require("./routes/admin");
 const productRouter = require("./routes/products");
+const userRouter = require("./routes/user");
 
 //middleware
 app.use(express.json());
 app.use(authRouter);
 app.use(adminRouter);
 app.use(productRouter);
+app.use(userRouter);
 //connections
 mongoose.connect(DB).then(() => {
     console.log("Connection Established");

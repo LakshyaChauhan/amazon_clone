@@ -1,0 +1,37 @@
+{
+    "provider": "google_pay",
+    "data": {
+      "environment": "TEST",
+      "apiVersion": 2,
+      "apiVersionMinor": 0,
+      "allowedPaymentMethods": [
+        {
+          "type": "CARD",
+          "parameters": {
+            "allowedCardNetworks": ["VISA", "MASTERCARD"],
+            "billingAddressRequired": true,
+            "billingAddressParameters": {
+              "format": "FULL",
+              "phoneNumberRequired": true
+            }
+          },
+          "tokenizationSpecification": {
+            "type": "PAYMENT_GATEWAY",
+            "parameters": {
+              "gateway": "your_gateway_name",
+              "gatewayMerchantId": "your_gateway_merchant_id"
+            }
+          }
+        }
+      ],
+      "merchantInfo": {
+        "merchantId": "your_merchant_id",
+        "merchantName": "Your Merchant Name"
+      },
+      "transactionInfo": {
+        "countryCode": "US",
+        "currencyCode": "USD"
+      }
+    }
+  }
+  
