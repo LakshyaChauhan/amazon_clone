@@ -1,5 +1,5 @@
 import 'package:amazon_clone/common/widgets/bottom_bar.dart';
-import 'package:amazon_clone/features/address/screens/address_screen.dart';
+import 'package:amazon_clone/features/address/screens/adress_screen.dart';
 import 'package:amazon_clone/features/admin/screens/add_product_screen.dart';
 import 'package:amazon_clone/features/auth/screens/auth_screen.dart';
 import 'package:amazon_clone/features/home/screens/category_deals_screen.dart';
@@ -27,7 +27,7 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
       var searchQuerry = routeSettings.arguments as String;
       return MaterialPageRoute(
           builder: (_) => SearchScreen(
-                searchQuerry: searchQuerry,
+                searchQuery: searchQuerry,
               ));
 
     case CategoryDealsScreen.routeName:

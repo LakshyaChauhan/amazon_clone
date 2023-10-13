@@ -1,5 +1,10 @@
+import 'dart:io';
+
 import 'package:amazon_clone/common/widgets/custom_textfield.dart';
 import 'package:amazon_clone/constants/global_variables.dart';
+import 'package:amazon_clone/constants/utils.dart';
+import 'package:amazon_clone/features/address/services/address_services.dart';
+import 'package:amazon_clone/features/address/services/payment_configurations.dart';
 import 'package:amazon_clone/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:pay/pay.dart';
@@ -21,9 +26,47 @@ class _AdressScreenState extends State<AdressScreen> {
   final TextEditingController pincodeController = TextEditingController();
   final TextEditingController cityController = TextEditingController();
   final _addressFormKey = GlobalKey<FormState>();
-  List<PaymentItem> paymentItems = [];
+  final AdressServices adressServices = AdressServices();
 
-  void googlePayResult(res) {}
+  List<PaymentItem> paymentItems = [];
+  String os = Platform.operatingSystem;
+
+  String addressToBeUsed = "";
+
+  void payPressed(String addressFromProvider) {
+    addressToBeUsed = "";
+
+    bool isForm = flatBuildingController.text.isNotEmpty ||
+        areaController.text.isNotEmpty ||
+        pincodeController.text.isNotEmpty ||
+        cityController.text.isNotEmpty;
+    if (isForm) {
+      if (_addressFormKey.currentState!.validate()) {
+        addressToBeUsed =
+            "${flatBuildingController.text.isNotEmpty} , ${areaController.text.isNotEmpty} ,${pincodeController.text.isNotEmpty}, ${cityController.text.isNotEmpty}";
+      } else {
+        throw Exception('Please enter all Values');
+      }
+    } else if (addressFromProvider.isNotEmpty) {
+      addressToBeUsed = addressFromProvider;
+    } else {
+      showSnackbar(context, 'Error');
+    }
+  }
+
+  void googlePayResult(res) {
+    if (Provider.of<UserProvider>(context, listen: false)
+        .user
+        .address
+        .isEmpty) {
+      adressServices.saveUserAddress(
+          context: context, address: addressToBeUsed);
+    }
+    adressServices.placeOrder(
+        context: context,
+        address: addressToBeUsed,
+        totalSum: double.parse(widget.totalAmount));
+  }
 
   @override
   void initState() {
@@ -48,8 +91,7 @@ class _AdressScreenState extends State<AdressScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // final address = context.watch<UserProvider>().user.address;
-    const address = '101 Fake Address';
+    final address = context.watch<UserProvider>().user.address;
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
@@ -75,11 +117,11 @@ class _AdressScreenState extends State<AdressScreen> {
                           border: Border.all(
                         color: Colors.black12,
                       )),
-                      child: const Padding(
-                        padding: EdgeInsets.all(8),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8),
                         child: Text(
                           address,
-                          style: TextStyle(fontSize: 18),
+                          style: const TextStyle(fontSize: 18),
                         ),
                       ),
                     ),
@@ -117,17 +159,28 @@ class _AdressScreenState extends State<AdressScreen> {
                   ],
                 ),
               ),
+              const SizedBox(height: 20),
               GooglePayButton(
-                paymentConfigurationAsset: 'gpay.json',
+                paymentConfiguration:
+                    PaymentConfiguration.fromJsonString(defaultGooglePay),
                 onPaymentResult: googlePayResult,
                 paymentItems: paymentItems,
-                height: 50,
-                type: GooglePayButtonType.buy,
-                margin: const EdgeInsets.only(top: 15),
-                loadingIndicator: const Center(
-                  child: CircularProgressIndicator(),
-                ),
+                margin: const EdgeInsets.all(5),
+                width: double.infinity - 10,
+                type: GooglePayButtonType.pay,
               ),
+              // GooglePayButton(
+              //   onPressed: () => payPressed(address),
+              //   paymentConfigurationAsset: 'gpay.json',
+              //   onPaymentResult: googlePayResult,
+              //   paymentItems: paymentItems,
+              //   height: 50,
+              //   type: GooglePayButtonType.buy,
+              //   margin: const EdgeInsets.only(top: 15),
+              //   loadingIndicator: const Center(
+              //     child: CircularProgressIndicator(),
+              //   ),
+              // ),
             ],
           ),
         ),

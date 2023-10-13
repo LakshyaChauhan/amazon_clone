@@ -79,7 +79,7 @@ class _DealOfDayState extends State<DealOfDay> {
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: product!.images
                             .map(
                               (e) => Image.network(

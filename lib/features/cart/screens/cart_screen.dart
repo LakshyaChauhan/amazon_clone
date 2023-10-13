@@ -1,6 +1,6 @@
 import 'package:amazon_clone/common/widgets/custombutton.dart';
 import 'package:amazon_clone/constants/global_variables.dart';
-import 'package:amazon_clone/features/address/screens/address_screen.dart';
+import 'package:amazon_clone/features/address/screens/adress_screen.dart';
 import 'package:amazon_clone/features/cart/widgets/cart_product.dart';
 import 'package:amazon_clone/features/cart/widgets/cart_subtotal.dart';
 import 'package:amazon_clone/features/home/widgets/address_box.dart';

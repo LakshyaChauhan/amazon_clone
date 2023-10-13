@@ -51,6 +51,7 @@ class ProductDetailsServices {
         Uri.parse('$uri/api/rate-product'),
         body: jsonEncode({
           'id': product.id,
+          'rating':rating,
         }),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
