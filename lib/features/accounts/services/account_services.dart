@@ -5,17 +5,17 @@ import 'dart:convert';
 import 'package:amazon_clone/constants/error_handling.dart';
 import 'package:amazon_clone/constants/global_variables.dart';
 import 'package:amazon_clone/constants/utils.dart';
-import 'package:amazon_clone/models/product.dart';
+import 'package:amazon_clone/models/order.dart';
 import 'package:amazon_clone/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
 class AccountServices{
-  Future<List<Product>> fetchMyOrders(
-      BuildContext context, String category) async {
+  Future<List<Order>> fetchMyOrders(
+      BuildContext context) async {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
-    List<Product> productList = [];
+    List<Order> orderList = [];
     try {
       http.Response res = await http
           .get(Uri.parse('$uri/api/orders/me'), headers: {
@@ -28,8 +28,8 @@ class AccountServices{
           context: context,
           onSuccess: () {
             for (int i = 0; i < jsonDecode(res.body).length; i++) {
-              productList.add(
-                Product.fromJson(
+              orderList.add(
+                Order.fromJson(
                   jsonEncode(
                     jsonDecode(res.body)[i],
                   ),
@@ -40,7 +40,7 @@ class AccountServices{
     } catch (e) {
       showSnackbar(context, e.toString());
     }
-    return productList;
+    return orderList;
   }
 
 }
