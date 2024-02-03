@@ -1,16 +1,42 @@
-# amazon_clone
 
-A new Flutter project.
+# E Commerece Clone App (AMAZON)
 
-## Getting Started
+I'm building a dynamic e-commerce app using Flutter for the frontend and Node.js for the backend, inspired by Amazon!  It will offer a seamless shopping experience with features like:
 
-This project is a starting point for a Flutter application.
+Intuitive browsing & search: Navigate a wide range of products with ease.
 
-A few resources to get you started if this is your first Flutter project:
+Secure checkout: Enjoy a safe and reliable payment process.
+Personalized recommendations: Discover items you'll love based on your interests.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+User-friendly interface: Experience a smooth and intuitive design on both Android and iOS.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+## Screenshots
+
+<div style="display: flex;">
+  
+  <img src="https://github.com/LakshyaChauhan/amazon_clone/blob/main/SCREENSHOT%20OF%20APP/Screenshot_1706979123.png?raw=true" width="300" height="450">
+  
+  
+  <img src="https://github.com/LakshyaChauhan/amazon_clone/blob/main/SCREENSHOT%20OF%20APP/Screenshot_1706979162.png?raw=true" width="300" height="450">
+  <img src="https://github.com/LakshyaChauhan/amazon_clone/blob/main/SCREENSHOT%20OF%20APP/Screenshot_1706979194.png?raw=true" width="300" height="450">
+  
+  <img src="https://github.com/LakshyaChauhan/amazon_clone/blob/main/SCREENSHOT%20OF%20APP/Screenshot_1706979177.png?raw=true" width="300" height="450">
+  
+  <img src="https://github.com/LakshyaChauhan/amazon_clone/blob/main/SCREENSHOT%20OF%20APP/Screenshot_1706979180.png?raw=true" width="300" height="450">
+  
+  <img src="https://github.com/LakshyaChauhan/amazon_clone/blob/main/SCREENSHOT%20OF%20APP/Screenshot_1706979184.png?raw=true" width="300" height="450">
+  <img src="https://github.com/LakshyaChauhan/amazon_clone/blob/main/SCREENSHOT%20OF%20APP/Screenshot_1706979186.png?raw=true" width="300" height="450">
+    
+  <img src="https://github.com/LakshyaChauhan/amazon_clone/blob/main/SCREENSHOT%20OF%20APP/Screenshot_1706979188.png?raw=true" width="300" height="450">
+</div>
+
+## Video Link
+<a href="https://github.com/LakshyaChauhan/amazon_clone/tree/main/video">Click here to visit video..</a>
+
+
+## Tech Stack
+
+**Frontend:** Flutter
+
+**Server:** Node, Express
