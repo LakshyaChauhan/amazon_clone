@@ -138,21 +138,25 @@ class _AdressScreenState extends State<AdressScreen> {
                 child: Column(
                   children: [
                     CustomTextField(
+                      obscureText: false,
                       controller: flatBuildingController,
                       hintText: 'Flat , House No , Building',
                     ),
                     const SizedBox(height: 8),
                     CustomTextField(
+                      obscureText: false,
                       controller: areaController,
                       hintText: 'Area, Street',
                     ),
                     const SizedBox(height: 8),
                     CustomTextField(
+                      obscureText: false,
                       controller: pincodeController,
                       hintText: 'Pincode',
                     ),
                     const SizedBox(height: 8),
                     CustomTextField(
+                      obscureText: false,
                       controller: cityController,
                       hintText: 'City / Town',
                     ),

@@ -92,21 +92,25 @@ class _AuthScreenState extends State<AuthScreen> {
                     child: Column(
                       children: [
                         CustomTextField(
+                          obscureText: false,
                           controller: _nameController,
                           hintText: 'Name',
                         ),
                         const SizedBox(height: 8),
                         CustomTextField(
+                          obscureText: false,
                           controller: _emailController,
                           hintText: 'Email',
                         ),
                         const SizedBox(height: 8),
                         CustomTextField(
+                          obscureText: true,
                           controller: _passwordController,
                           hintText: 'Password',
                         ),
                         const SizedBox(height: 8),
                         CustomButton(
+                            color: Colors.orange,
                             onTap: () {
                               if (_signUpFormKey.currentState!.validate()) {
                                 signUpUser();
@@ -144,16 +148,19 @@ class _AuthScreenState extends State<AuthScreen> {
                     child: Column(
                       children: [
                         CustomTextField(
+                          obscureText: false,
                           controller: _emailController,
                           hintText: 'Email',
                         ),
                         const SizedBox(height: 8),
                         CustomTextField(
+                          obscureText: true,
                           controller: _passwordController,
                           hintText: 'Password',
                         ),
                         const SizedBox(height: 8),
                         CustomButton(
+                          color: Colors.orange,
                             onTap: () {
                               if (_signInFormKey.currentState!.validate()) {
                                 signInUser();

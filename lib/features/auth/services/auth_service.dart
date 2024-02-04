@@ -4,6 +4,7 @@ import 'package:amazon_clone/common/widgets/bottom_bar.dart';
 import 'package:amazon_clone/constants/error_handling.dart';
 import 'package:amazon_clone/constants/global_variables.dart';
 import 'package:amazon_clone/constants/utils.dart';
+import 'package:amazon_clone/features/auth/screens/auth_screen.dart';
 import 'package:amazon_clone/models/user.dart';
 import 'package:amazon_clone/providers/user_provider.dart';
 import 'package:flutter/material.dart';
@@ -77,6 +78,31 @@ class AuthServices {
         },
       );
     } catch (e) {
+      showSnackbar(context, e.toString());
+    }
+  }
+
+  void signOutUser({
+    required BuildContext context,
+    required email,
+  }) async {
+    try {
+      http.Response response = await http.post(
+        Uri.parse("$uri/api/signout"),
+        body: jsonEncode({"email": email}),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+      );
+      httpErrorHandle(
+          response: response,
+          context: context,
+          onSuccess: () {
+            Navigator.pushNamedAndRemoveUntil(
+                context, AuthScreen.routeName, (route) => false);
+          });
+    } catch (e) {
+      print('Error in the signout Method');
       showSnackbar(context, e.toString());
     }
   }
